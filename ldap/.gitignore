@@ -1,0 +1,4 @@
+# Local runtime data for lldap
+secrets/
+data/
+certs/

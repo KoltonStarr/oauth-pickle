@@ -1,0 +1,23 @@
+version: '3'
+services:
+  lldap:
+    image: lldap/lldap:stable
+    ports:
+      - "17170:17170"  # web interface
+      - "3890:3890"    # LDAP
+      - "6360:6360"    # LDAPS
+    environment:
+      UID: ${UID:-1000}
+      GID: ${GID:-1000}
+      TZ: ${TZ:-UTC}
+      LLDAP_JWT_SECRET_FILE: /secrets/jwt_secret
+      LLDAP_KEY_SEED_FILE: /secrets/key_seed
+      LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN:-dc=example,dc=com}
+      LLDAP_LDAP_USER_PASS_FILE: /secrets/admin_pass
+      LLDAP_LDAPS_OPTIONS__ENABLED: "true"
+      LLDAP_LDAPS_OPTIONS__CERT_FILE: /certs/lldap.cert.pem
+      LLDAP_LDAPS_OPTIONS__KEY_FILE: /certs/lldap.key.pem
+    volumes:
+      - ./data:/data
+      - ./secrets:/secrets:ro
+      - ./certs:/certs:ro
