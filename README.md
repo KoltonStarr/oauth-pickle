@@ -75,11 +75,11 @@ keytool -genkeypair -alias keycloak -keyalg RSA -keystore keycloak.jks -storepas
 ```
 
 Applications then need to present their client certificate when talking to Keycloak over HTTPS.
-You can also use the helper scripts under `tls/` to create a local CA and issue certificates:
+You can also use the helper scripts under `tls/` to create a local CA and then
+launch an interactive utility for managing certificates:
 ```bash
 ./tls/ca/create-ca.sh
-./tls/client-certs/generate-client-cert.sh alice
-./tls/server-certs/generate-server-cert.sh myservice
+./tls/cert-cli.sh
 ```
 
 
